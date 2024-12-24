@@ -12,6 +12,7 @@
             padding: 0;
             background-color: #121212;
             color: #e0e0e0;
+            overflow-x: hidden;
         }
 
         header {
@@ -20,6 +21,7 @@
             padding: 1.5rem 0;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
         }
 
         header h1 {
@@ -42,10 +44,26 @@
             color: #76c7c0;
             margin: 0 1.5rem;
             font-size: 1.1rem;
+            position: relative;
+            transition: color 0.3s ease-in-out;
         }
 
         nav a:hover {
             color: #e0e0e0;
+        }
+
+        nav a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: #76c7c0;
+            transition: width 0.3s;
+            margin: 0 auto;
+        }
+
+        nav a:hover::after {
+            width: 50%;
         }
 
         section {
@@ -55,6 +73,7 @@
             background: #1f1f1f;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
+            animation: slideIn 1s ease-in-out;
         }
 
         section h2 {
@@ -75,6 +94,12 @@
             margin: 0.5rem 0;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        section ul li:hover {
+            background: #3a3a3a;
+            transform: scale(1.05);
         }
 
         footer {
@@ -86,6 +111,7 @@
             bottom: 0;
             width: 100%;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-in-out;
         }
 
         footer p {
@@ -96,10 +122,32 @@
         a {
             color: #76c7c0;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         a:hover {
             text-decoration: underline;
+            color: #e0e0e0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -123,14 +171,16 @@
     <section id="projects">
         <h2>Projets</h2>
         <ul>
-            
+            <li>Simulation de robot de football</li>
+            <li>Applications Python utilisant KivyMD</li>
+            <li>Projets Arduino avec des capteurs et affichages LCD</li>
         </ul>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>Email : <a href="mailto:samuel.legrand33840@gmail.com.com">samuel.legrand33840@gmail.com</a></p>
-        <p>Réseaux sociaux :<a href="https://github.com/samdelerm">GitHub</a></p>
+        <p>Email : <a href="mailto:samuel.legrand@example.com">samuel.legrand@example.com</a></p>
+        <p>Réseaux sociaux : <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
     </section>
 
     <footer>
