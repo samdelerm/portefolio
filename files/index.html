@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des fichiers - Samuel Legrand</title>
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: rgba(31, 31, 31, 0.9);
+            color: #00ffcc;
+            padding: 1.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #00ffcc;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: rgba(31, 31, 31, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid #00ffcc;
+        }
+
+        section h2 {
+            color: #00ffcc;
+            border-bottom: 2px solid #00ffcc;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background: rgba(31, 31, 31, 0.9);
+            color: #00ffcc;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+            border-top: 2px solid #00ffcc;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        a {
+            color: #00ffcc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Gestion des fichiers</h1>
+    </header>
+
+    <section>
+        <h2>Fichiers disponibles</h2>
+        <ul>
+            <?php
+            session_start();
+            if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+                echo "Accès refusé. Veuillez vous connecter.";
+                exit;
+            }
+
+            $dir = "../uploads/";
+            if (is_dir($dir)){
+                if ($dh = opendir($dir)){
+                    while (($file = readdir($dh)) !== false){
+                        if ($file != "." && $file != "..") {
+                            echo "<li><a href='../uploads/$file'>$file</a></li>";
+                        }
+                    }
+                    closedir($dh);
+                }
+            }
+            ?>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Samuel Legrand - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

@@ -7,26 +7,39 @@
     <title>Portfolio - Samuel Legrand</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             color: #e0e0e0;
             overflow-x: hidden;
         }
 
         header {
-            background-color: #1f1f1f;
-            color: #76c7c0;
+            background: rgba(31, 31, 31, 0.9);
+            color: #00ffcc;
             padding: 1.5rem 0;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in-out;
+            border-bottom: 2px solid #00ffcc;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from {
+                text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc, 0 0 40px #00ffcc, 0 0 50px #00ffcc, 0 0 60px #00ffcc, 0 0 70px #00ffcc;
+            }
+            to {
+                text-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc, 0 0 40px #00ffcc, 0 0 50px #00ffcc, 0 0 60px #00ffcc, 0 0 70px #00ffcc, 0 0 80px #00ffcc;
+            }
         }
 
         header p {
@@ -37,11 +50,15 @@
         nav {
             text-align: center;
             margin: 1rem 0;
+            background: rgba(31, 31, 31, 0.9);
+            padding: 1rem 0;
+            border-bottom: 2px solid #00ffcc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         nav a {
             text-decoration: none;
-            color: #76c7c0;
+            color: #00ffcc;
             margin: 0 1.5rem;
             font-size: 1.1rem;
             position: relative;
@@ -57,7 +74,7 @@
             display: block;
             width: 0;
             height: 2px;
-            background: #76c7c0;
+            background: #00ffcc;
             transition: width 0.3s;
             margin: 0 auto;
         }
@@ -66,21 +83,42 @@
             width: 50%;
         }
 
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ffcc, #ff00cc, #00ccff, #cc00ff);
+            background-size: 400%;
+            z-index: -1;
+            filter: blur(5px);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        nav a:hover::before {
+            opacity: 1;
+        }
+
         section {
             max-width: 800px;
             margin: 2rem auto;
             padding: 1.5rem;
-            background: #1f1f1f;
+            background: rgba(31, 31, 31, 0.9);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             border-radius: 10px;
             animation: slideIn 1s ease-in-out;
+            border: 1px solid #00ffcc;
         }
 
         section h2 {
-            color: #76c7c0;
-            border-bottom: 2px solid #76c7c0;
+            color: #00ffcc;
+            border-bottom: 2px solid #00ffcc;
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
+            text-transform: uppercase;
         }
 
         section ul {
@@ -89,29 +127,88 @@
         }
 
         section ul li {
-            background: #292929;
+            background: rgba(41, 41, 41, 0.9);
             padding: 0.8rem;
             margin: 0.5rem 0;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid #00ffcc;
         }
 
         section ul li:hover {
-            background: #3a3a3a;
+            background: rgba(58, 58, 58, 0.9);
             transform: scale(1.05);
+        }
+
+        #contact {
+            text-align: center;
+        }
+
+        #contact p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+
+        #contact a {
+            color: #00ffcc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #contact a:hover {
+            text-decoration: underline;
+            color: #e0e0e0;
+        }
+
+        
+        #file-management {
+            text-align: center;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: rgba(31, 31, 31, 0.9);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            border: 1px solid #00ffcc;
+            max-width: 800px;
+            display: none; /* Hide by default */
+        }
+
+        #file-management input[type="file"] {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #00ffcc;
+            border-radius: 5px;
+            background: rgba(31, 31, 31, 0.9);
+            color: #e0e0e0;
+            width: calc(100% - 1rem);
+        }
+
+        #file-management button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #00ffcc;
+            color: #1f1f1f;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #file-management button:hover {
+            background: #00cc99;
         }
 
         footer {
             text-align: center;
             padding: 1rem 0;
-            background-color: #1f1f1f;
-            color: #76c7c0;
+            background: rgba(31, 31, 31, 0.9);
+            color: #00ffcc;
             position: relative;
             bottom: 0;
             width: 100%;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
             animation: fadeIn 1s ease-in-out;
+            border-top: 2px solid #00ffcc;
         }
 
         footer p {
@@ -120,7 +217,7 @@
         }
 
         a {
-            color: #76c7c0;
+            color: #00ffcc;
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -150,6 +247,7 @@
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -171,20 +269,49 @@
     <section id="projects">
         <h2>Projets</h2>
         <ul>
-            <li>Simulation de robot de football</li>
-            <li>Applications Python utilisant KivyMD</li>
-            <li>Projets Arduino avec des capteurs et affichages LCD</li>
+            <li><a href="projects/robot-football.html">Simulation de robot de football</a></li>
+            <li><a href="projects/python-kivymd.html">Applications Python utilisant KivyMD</a></li>
+            <li><a href="projects/arduino-projects.html">Projets Arduino avec des capteurs et affichages LCD</a></li>
         </ul>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>Email : <a href="mailto:samuel.legrand@example.com">samuel.legrand@example.com</a></p>
+        <p>Email : <a href="mailto:samuel.legrand33840@gmail.com">samuel.legrand33840@gmail.com</a></p>
         <p>Réseaux sociaux : <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
+        <p>Formulaire de contact :</p>
+        <form>
+            <input type="text" name="name" placeholder="Votre nom" required style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #00ffcc; border-radius: 5px; background: rgba(31, 31, 31, 0.9); color: #e0e0e0;">
+            <input type="email" name="email" placeholder="Votre email" required style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #00ffcc; border-radius: 5px; background: rgba(31, 31, 31, 0.9); color: #e0e0e0;">
+            <textarea name="message" placeholder="Votre message" required style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #00ffcc; border-radius: 5px; background: rgba(31, 31, 31, 0.9); color: #e0e0e0;"></textarea>
+            <button type="submit" style="padding: 0.5rem 1rem; border: none; border-radius: 5px; background: #00ffcc; color: #1f1f1f; cursor: pointer; transition: background 0.3s ease;">Envoyer</button>
+        </form>
+    </section>
+
+    
+
+    <section id="file-management">
+        <h2>Gestion des fichiers</h2>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <button type="submit" name="submit">Téléverser</button>
+        </form>
+        <h3>Fichiers disponibles</h3>
+        <ul id="file-list">
+            <!-- Dynamically populated list of files -->
+        </ul>
     </section>
 
     <footer>
         <p>&copy; 2024 Samuel Legrand - Tous droits réservés.</p>
     </footer>
+
+    <script>
+        // Check if user is logged in
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            document.getElementById('file-management').style.display = 'block';
+            document.getElementById('login').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
