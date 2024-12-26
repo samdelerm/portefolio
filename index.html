@@ -246,6 +246,41 @@
                 opacity: 1;
             }
         }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form input, form textarea, form button {
+            width: calc(100% - 1rem);
+            max-width: 500px;
+        }
+
+        form input, form textarea {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border: 1px solid #00ffcc;
+            border-radius: 5px;
+            background: rgba(31, 31, 31, 0.9);
+            color: #e0e0e0;
+        }
+
+        form button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #00ffcc;
+            color: #1f1f1f;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        form button:hover {
+            background: #00cc99;
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -268,38 +303,28 @@
 
     <section id="projects">
         <h2>Projets</h2>
-        <ul>
-            <li><a href="projects/robot-football.html">Simulation de robot de football</a></li>
-            <li><a href="projects/python-kivymd.html">Applications Python utilisant KivyMD</a></li>
-            <li><a href="projects/arduino-projects.html">Projets Arduino avec des capteurs et affichages LCD</a></li>
+        <ul id="project-list">
+            <!-- Projets insérés par le CMS -->
         </ul>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
         <p>Email : <a href="mailto:samuel.legrand33840@gmail.com">samuel.legrand33840@gmail.com</a></p>
-        <p>Réseaux sociaux : <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
+        <p>Réseaux sociaux : <a href="https://github.com/samdelerm">GitHub</a></p>
         <p>Formulaire de contact :</p>
         <form>
-            <input type="text" name="name" placeholder="Votre nom" required style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #00ffcc; border-radius: 5px; background: rgba(31, 31, 31, 0.9); color: #e0e0e0;">
-            <input type="email" name="email" placeholder="Votre email" required style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #00ffcc; border-radius: 5px; background: rgba(31, 31, 31, 0.9); color: #e0e0e0;">
-            <textarea name="message" placeholder="Votre message" required style="padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #00ffcc; border-radius: 5px; background: rgba(31, 31, 31, 0.9); color: #e0e0e0;"></textarea>
-            <button type="submit" style="padding: 0.5rem 1rem; border: none; border-radius: 5px; background: #00ffcc; color: #1f1f1f; cursor: pointer; transition: background 0.3s ease;">Envoyer</button>
+            <input type="text" name="name" placeholder="Votre nom" required>
+            <input type="email" name="email" placeholder="Votre email" required>
+            <textarea name="message" placeholder="Votre message" required></textarea>
+            <button type="submit">Envoyer</button>
         </form>
     </section>
 
     
 
-    <section id="file-management">
-        <h2>Gestion des fichiers</h2>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="fileToUpload" id="fileToUpload">
-            <button type="submit" name="submit">Téléverser</button>
-        </form>
-        <h3>Fichiers disponibles</h3>
-        <ul id="file-list">
-            <!-- Dynamically populated list of files -->
-        </ul>
+    
+    
     </section>
 
     <footer>
@@ -307,11 +332,23 @@
     </footer>
 
     <script>
-        // Check if user is logged in
-        if (sessionStorage.getItem('loggedIn') === 'true') {
-            document.getElementById('file-management').style.display = 'block';
-            document.getElementById('login').style.display = 'none';
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const projectList = document.getElementById('project-list');
+            const projects = [
+                { title: 'Simulation de robot de football', link: 'projects/robot-football.html' },
+                { title: 'Applications Python utilisant KivyMD', link: 'projects/python-kivymd.html' },
+                { title: 'Projets Arduino avec des capteurs et affichages LCD', link: 'projects/arduino-projects.html' }
+            ];
+
+            projects.forEach(project => {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = project.link;
+                a.textContent = project.title;
+                li.appendChild(a);
+                projectList.appendChild(li);
+            });
+        });
     </script>
 </body>
 </html>
